@@ -20,6 +20,9 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          name: Say hello
+          command: "echo Node version right now: $(node -v)"
+      - run:
           name: Check ESLint
           command: "yarn lint"
       - run:
