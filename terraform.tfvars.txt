@@ -1,0 +1,4 @@
+aws_region = "us-east-1"
+aws_access_key = "AKIATNR5PD3T6M2RLZ4W"
+aws_secret_key = "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"
+vpc_network_cidr = "172.16.0.0/16"
