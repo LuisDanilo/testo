@@ -1,0 +1,31 @@
+version: 2.1
+
+# Repeteable chunk of code
+anchors:
+  filters: &filters
+    filters: 
+      branches:
+        only: terraform
+
+orbs: 
+  aws-ecr: circleci/aws-ecr@8.1.2
+
+workflows:
+  build_and_push_image:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          <<: *filters
+          name: Build and push docker image
+          registry-id: AWS_ECR_ACCOUNT_ID # Set on terraform context
+          aws-access-key-id: AWS_ACCESS_KEY_ID # Set on terraform context
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY # Set on terraform context
+          region: "${AWS_DEFAULT_REGION}" # Set on terraform context
+          context: terraform-demo-test # Same configured using terraform
+          create-repo: false
+          dockerfile: Dockerfile
+          no-output-timeout: 20m
+          path: . # Path to find dockerfile
+          profile-name: default # AWS profile to use
+          repo: terraform-demo
+          skip-when-tags-exist: true
+          tag: "0.0.1"
