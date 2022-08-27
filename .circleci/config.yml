@@ -19,13 +19,12 @@ workflows:
           registry-id: AWS_ECR_ACCOUNT_ID # Set on terraform context
           aws-access-key-id: AWS_ACCESS_KEY_ID # Set on terraform context
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY # Set on terraform context
-          region: "${AWS_DEFAULT_REGION}" # Set on terraform context
+          region: "${AWS_DEFAULT_REGION}" # Set on terraform context (needs quotes idk why)
           context: terraform-demo-test # Same configured using terraform
           create-repo: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
           path: . # Path to find dockerfile
-          profile-name: default # AWS profile to use
-          repo: terraform-demo
+          repo: terraform-demo # Same repo name created using terraform
           skip-when-tags-exist: true
-          tag: "0.0.1"
+          tag: "0.0.2"
